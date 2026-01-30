@@ -1,0 +1,60 @@
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ruff ‒ global configuration (applies to both linter & formatter)
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.ruff]
+line-length  = 79      # Maximum line width enforced everywhere
+unsafe-fixes = true    # Allow "unsafe" auto-fixes (may change behaviour)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ruff formatter (Black-like, zero-config apart from these tweaks)
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.ruff.format]
+quote-style           = "single"  # Prefer single quotes where possible
+indent-style          = "space"
+docstring-code-format = true      # Reformat code blocks inside docstrings
+line-ending           = "auto"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ruff linter
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.ruff.lint]
+# Rule families to enable:
+select = [
+    "E",      # pycodestyle errors (style)
+    "F",      # Pyflakes           (bugs, unused imports, etc.)
+    "I",      # isort              (import sorting)
+    "B",      # flake8-bugbear
+    "C4",     # flake8-comprehensions
+    "N",      # pep8-naming        (naming conventions)
+    "D",      # pydocstyle         (PEP 257 docstrings)
+    "PIE790"  # PIE790 – flake8-pie’s “prefer enumerate” rule
+]
+
+# Extra rule to enforce imperative mood in docstring summary lines
+extend-select = ["D401"]
+
+# Nothing is globally ignored; leave empty list as explicit reminder
+ignore        = []
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Docstring-specific options (pydocstyle plugin)
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.ruff.lint.pydocstyle]
+# Use the plain PEP 257 baseline (no Google/Numpy section checks)
+convention = "pep257"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Naming-specific options (pep8-naming plugin)
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.ruff.lint.pep8-naming]
+# Permit a single underscore “_” as a valid throw-away variable name
+ignore-names = ["_"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Import sorting
+# ─────────────────────────────────────────────────────────────────────────────
+[tool.ruff.isort]
+# Add the name of each Django app as a known first-party module.
+# Ruff will now group imports starting with these names together.
+known-first-party = ["api",]
